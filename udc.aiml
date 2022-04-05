@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    
+  <!-- After user says "Hi," use random response. -->
+  <category>
+    <pattern>Hi</pattern>
+    <template>
+        <random>
+            <li>Howdy there! What's your name? Respond with: "My name is..."</li>
+            <li>Welcome. What's your name? Respond with: "My name is..."</li>
+            <li>Oh hi! What's your name? Respond with: "My name is..."</li>
+        </random>
+    </template>
+  </category>
+  
+  <!-- Filter user input to find only the users name. -->
+  <category>
+    <pattern>My name is *</pattern>
+    <!-- Determine if the user is a computer science major. -->
+    <template>Great to meet you <set name = "name"><star/></set>. Are you a 
+    computer science major?
+      <reply>
+            <text>Yes</text>
+            <postback>Ccompsciyes</postback>
+        </reply>
+        <reply>
+            <text>No</text>
+            <postback>Ccompscino</postback>
+        </reply>
+    </template>
+  </category>
+  
+  <!-- The user is indeed a computer science major. -->
+  <category>
+      <pattern>Ccompsciyes</pattern>
+      <template>
+          <delay>2</delay>
+          Great! I am going to help you decide on a type of job within 
+          computer science. 
+          <delay>1</delay>
+          First of all, here is a list of all of the great 
+          jobs available in computer science.
+          <delay>3</delay>
+          <!-- LIST OF ALL JOBS W/ LINKS.-->
+          Press the right arrow ( > ) to see all the available jobs!
+          <carousel>
+              <card>
+                <title>Cloud Engineer!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>Cloud Engineering</text>
+                  <url>https://en.wikipedia.org/wiki/Cloud_engineering</url>
+                </button>
+              </card>
+              <card>
+                <title>Front-end Web Development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>Front-end web development</text>
+                  <url>https://en.wikipedia.org/wiki/Front-end_web_development</url>
+                </button>
+              </card>
+              <card>
+                <title>3D Game Development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>3D game development</text>
+                  <url>https://en.wikipedia.org/wiki/Video_game_development</url>
+                </button>
+              </card>
+              <card>
+                <title>iOS development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>iOS development</text>
+                  <url>https://en.wikipedia.org/wiki/IOS</url>
+                </button>
+              </card>
+              <card>
+                <title>Android development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>Android development</text>
+                  <url>https://developer.android.com</url>
+                </button>
+              </card>
+          </carousel>
+          <delay>1</delay>
+          <!-- Let user decide if they like the internet side of comp sci. -->
+          <reply>
+            <text>I can't decide, help me!</text>
+            <postback>Cneedsquestions</postback>
+          </reply>
+      </template>
+  </category>
+  
+  <!-- The user is indeed a computer science major. -->
+  <category>
+      <pattern>Cneedsquestions</pattern>
+      <template>
+          <delay>2</delay>
+          No worries! I will help you narrow down the type of job within 
+          computer science that you'll love. 
+          <delay>1</delay>
+          To do so, I will ask you a series of questions.
+          <delay>2</delay>
+          First question: Do your interests in computer science 
+          lie primarily within the internet?
+          <delay>1</delay>
+          <!-- Let user decide if they like the internet side of comp sci. -->
+          <reply>
+            <text>Yes, I love the internet!</text>
+            <postback>Cyesinternet</postback>
+          </reply>
+          <reply>
+            <text>Doesn't matter to me.</text>
+            <postback>Cnointernet</postback>
+          </reply>
+      </template>
+  </category>
+  
+  <!-- Code to ask user a filter question. -->
+  <category>
+      <pattern>Cyesinternet</pattern>
+      <template>
+          <delay>2</delay>
+          That's great to hear because we have just the job for you! 
+          <delay>1</delay>
+          <card>
+              <title>Cloud Engineer!</title>
+              <subtitle>Read more here:</subtitle>
+              <image></image>
+              <button>
+                  <text>Cloud Engineering</text>
+                  <url>https://en.wikipedia.org/wiki/Cloud_engineering</url>
+              </button>
+          </card>
+      </template>
+  </category>
+  
+  <!-- Code to ask user a filter question. -->
+  <category>
+      <pattern>Cnointernet</pattern>
+      <template>
+          <delay>2</delay>
+          Ok, understood. Let me gather more information to help make a better 
+          decision for you.
+          <delay>3</delay>
+          When learning about computer science, do you often find yourself 
+          connecting with visual design of a game or program?
+          <!-- Ask user for next filtering question. -->
+          <delay>1</delay>
+          <reply>
+            <text>Yes, I love visual design!</text>
+            <postback>Cyesvisual</postback>
+          </reply>
+          <reply>
+            <text>Anything but that please.</text>
+            <postback>Cnovisual</postback>
+          </reply>
+      </template>
+  </category>
+  
+  <!-- Student likes visual design, choose between 2d and 3d. -->
+  <category>
+      <pattern>Cyesvisual</pattern>
+      <template>
+          <delay>2</delay>
+          Ok, great! Let me gather more information to help refine our 
+          recommendation.
+          <delay>3</delay>
+          When thinking about visual design in computer science, do you focus 
+          more on basic 2D design used more in business 
+          applications or more on 3D design found more in video games?
+          <!-- Ask user for next filtering question. -->
+          <delay>1</delay>
+          <reply>
+            <text>2D visual design is more up my alley.</text>
+            <postback>Cyes2d</postback>
+          </reply>
+          <reply>
+            <text>3D visual design interests me more.</text>
+            <postback>Cyes3d</postback>
+          </reply>
+      </template>
+  </category>
+  
+  <!-- Student likes 2d design. --> 
+  <category>
+      <pattern>Cyes2d</pattern>
+      <template>
+          <delay>2</delay>
+          That's great to hear because we have just the job for you! 
+          <delay>3</delay>
+          <card>
+                <title>Front-end Web Development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>Front-end web development</text>
+                  <url>https://en.wikipedia.org/wiki/Front-end_web_development</url>
+                </button>
+              </card>
+      </template>
+  </category>
+  
+  <!-- Student likes 3d design. --> 
+  <category>
+      <pattern>Cyes3d</pattern>
+      <template>
+          <delay>2</delay>
+          That's great to hear because we have just the job for you! 
+          <delay>3</delay>
+          <card>
+                <title>3D Game Development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>3D game development</text>
+                  <url>https://en.wikipedia.org/wiki/Video_game_development</url>
+                </button>
+              </card>
+      </template>
+  </category>
+  
+  <!-- Student dislikes visual design option. Filter for mobile OS 
+  development.-->
+  <category>
+      <pattern>Cnovisual</pattern>
+      <template>
+          <delay>2</delay>
+          Ok, understood. I think you're really going to like this next 
+          recommendation.
+          <delay>3</delay>
+          When using a mobile phone, do you find yourself enjoying the iPhone 
+          operating system more or the Android operating system?
+          <!-- Ask user for next filtering question. -->
+          <delay>1</delay>
+          <reply>
+            <text>I really like the iPhone (iOS) operating system!</text>
+            <postback>Cyesios</postback>
+          </reply>
+          <reply>
+            <text>The Android has a great operating system.</text>
+            <postback>Cyesandroid</postback>
+          </reply>
+      </template>
+  </category>
+  
+  <!-- Yes to iOS development. -->
+  <category>
+      <pattern>Cyesios</pattern>
+      <template>
+          Good news, we've found just the job for you.
+          <delay>2</delay>
+          <card>
+                <title>iOS development!</title>
+                <subtitle>Read more here:</subtitle>
+                <image></image>
+                <button>
+                  <text>iOS development</text>
+                  <url>https://en.wikipedia.org/wiki/IOS</url>
+                </button>
+              </card>
+      </template>
+  </category>
+  
+  <!-- Yes to Android development. -->
+  <category>
+      <pattern>Cyesandroid</pattern>
+      <template>
+          Good news, we've found just the job for you.
+          <delay>2</delay>
+          <card>
+            <title>Android development!</title>
+            <subtitle>Read more here:</subtitle>
+            <image></image>
+            <button>
+                <text>Android development</text>
+                <url>https://developer.android.com</url>
+            </button>
+          </card>
+      </template>
+  </category>
+  
+  <!-- The user is not a computer science major. -->
+  <category>
+      <pattern>Ccompscino</pattern>
+      <delay>2</delay>
+      <template>That's great, I am sure its still a great major! 
+      Unfortunately I have no recommendations for your major at this time. 
+      </template>
+  </category>
+  
+  <!-- Baseline response if user input is invalid/bad. -->
+  <category>
+    <pattern>*</pattern>
+    <template>Sorry <get name="name" />, I do not know what you mean.</template>
+  </category>
+  
+</aiml>
+
+
